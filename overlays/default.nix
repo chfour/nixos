@@ -28,6 +28,24 @@
         };
       });
     })
+
+    #(self: super: {
+    #  # this didn't work it complained about click when building
+    #  # sent in an update request
+    #  platformio = super.platformio.override {
+    #    platformio-core = super.platformio-core.overrideAttrs (old: rec {
+    #      version = "6.1.11";
+    #      src = super.fetchFromGitHub {
+    #        owner = "platformio";
+    #        repo = "platformio-core";
+    #        rev = "v${version}";
+    #        sha256 = "sha256-NR4UyAt8q5sUGtz1Sy6E8Of7y9WrH9xpcAWzLBeDQmo=";
+    #      };
+    #      patches = [ ./pio-fix-searchpath.patch ./pio-use-local-spdx-license-list.patch ];
+    #    });
+    #  };
+    #})
+    
     #(self: super: {
     #  # so that's broken, let's revert it to the version in 23.05
     #  python3 = super.python3.override {
