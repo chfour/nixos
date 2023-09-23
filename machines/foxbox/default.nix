@@ -37,17 +37,7 @@
   };
   console.keyMap = "pl2";
 
-  programs.zsh = {
-    enable = true;
-    ohMyZsh = {
-      enable = true;
-      plugins = [ "git" "fzf" "colored-man-pages" ];
-      theme = "af-magic";
-      customPkgs = with pkgs; [
-        nix-zsh-completions
-      ];
-    };
-  };
+  programs.zsh.enable = true; # todo: get rid of this if possible
   environment.shells = with pkgs; [ zsh ];
   
   programs.steam.enable = true;

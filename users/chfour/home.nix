@@ -7,6 +7,19 @@
   home.username = "chfour";
   home.homeDirectory = "/home/chfour";
 
+  home.sessionVariables = {
+    EDITOR = "micro";
+  };
+
+  programs.zsh = {
+    enable = true;
+    history.size = 50000;
+    oh-my-zsh = {
+      enable = true;
+      plugins = [ "git" "fzf" "colored-man-pages" ];
+      theme = "af-magic";
+    };
+  };
 
   programs.git = {
     enable = true;
