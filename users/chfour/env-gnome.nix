@@ -21,10 +21,9 @@
       hacks-level = 0; # "highest performance" option
     };
     
-    # set the theme
+    # set the gtk4 theme/scheme (i also set the gtk3 theme later)
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
-      gtk-theme = "Adwaita-dark";
     };
 
     # enable minimize, maximize buttons
@@ -82,6 +81,13 @@
 
   gtk = {
     enable = true;
+
+    # gtk3 theme
+    theme = {
+      name = "adw-gtk3-dark";
+      package = pkgs.adw-gtk3;
+    };
+    
     cursorTheme = {
       name = "Vanilla-DMZ";
       package = pkgs.vanilla-dmz;
