@@ -19,6 +19,7 @@
       plugins = [ "git" "fzf" "colored-man-pages" ];
       theme = "af-magic";
     };
+    syntaxHighlighting.enable = true;
   };
 
   programs.git = {
