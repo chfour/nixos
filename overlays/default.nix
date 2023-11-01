@@ -3,18 +3,6 @@
 {
   nixpkgs.overlays = [
     (self: super: {
-      python311 = super.python311.override {
-        packageOverrides = pyself: pysuper: {
-          # https://github.com/NixOS/nixpkgs/pull/262733
-          inherit (pkgs-master.python311Packages) pygls cmake-language-server jedi-language-server ruff-lsp;
-        };
-      };
-      python311Packages = self.python311.pkgs;
-      
-      beets = pkgs-master.beets;
-    })
-    
-    (self: super: {
       sdrpp = super.sdrpp.overrideAttrs (old: {
         src = super.fetchFromGitHub {
           owner = "AlexandreRouma";
