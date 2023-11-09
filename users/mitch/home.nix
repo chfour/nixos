@@ -25,7 +25,7 @@ in {
     };
     syntaxHighlighting.enable = true;
   };
-
+  
   programs.git = {
     enable = true;
     
