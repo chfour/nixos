@@ -1,8 +1,12 @@
 { pkgs, lib, osConfig, config, ... }:
 
-{
-  # kinda ugly
-  imports = (if osConfig.services.xserver.desktopManager.gnome.enable then [ ./env-gnome.nix ] else []);
+let
+  isGui = osConfig.services.xserver.enable;
+in {
+  # not ugly anymore
+  imports = builtins.concatLists [
+    (lib.optional osConfig.services.xserver.desktopManager.gnome.enable ./env-gnome.nix)
+  ];
   
   home.username = "chfour";
   home.homeDirectory = "/home/chfour";
@@ -38,7 +42,7 @@
   };
 
   programs.vscode = {
-    enable = true;
+    enable = isGui;
     package = pkgs.vscodium;
     
     extensions = with pkgs.vscode-extensions; [
@@ -72,10 +76,10 @@
     };
   };
 
-  xdg.userDirs.enable = true;
+  xdg.userDirs.enable = isGui;
   
   services.mpd = {
-    enable = true;
+    enable = isGui;
     network.startWhenNeeded = true;
     
     # holy shit :sob:
@@ -87,35 +91,39 @@
     '';
   };
 
-  home.packages = with pkgs; [
-    tree file usbutils pciutils
-    
-    firefox
-    keepassxc
-    (discord-canary.override {
-      withOpenASAR = true;
-    })
-    helvum
-    inkscape gimp
-    obs-studio
-    prismlauncher
-    #cnping
-    beets yt-dlp
-    mat2
+  home.packages = builtins.concatLists (with pkgs; [
+    [ # universal
+      btop
+      micro
+      tree file usbutils pciutils
+      jq ffmpeg imagemagick
+      sqlite-interactive
 
-    btop
-    git jq
-    hyfetch
-    ffmpeg imagemagick
-    mpv sox
-    sqlite-interactive
-    platformio
-  
-    sdrpp
-    rtl-sdr
-    gpredict
-    #chirp # lol lmao
-  ] ++ (if config.services.mpd.enable then [ pkgs.mpdevil ] else []);
+      hyfetch
+      
+      mat2
+      yt-dlp
+    ]
+    (lib.optionals isGui [ # stuff i use on desktops
+      firefox
+      keepassxc
+      (discord-canary.override {
+        withOpenASAR = true;
+      })
+      helvum
+      inkscape gimp
+      obs-studio
+      prismlauncher
+      mpv sox
+      platformio
+    
+      sdrpp
+      rtl-sdr
+      gpredict
+      #chirp # lol lmao
+    ])
+    (lib.optional config.services.mpd.enable mpdevil)    
+  ]);
   
   programs.home-manager.enable = true;
   home.stateVersion = "23.05";
