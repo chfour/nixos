@@ -99,6 +99,8 @@ in {
       jq ffmpeg imagemagick
       sqlite-interactive
 
+      fzf
+      
       hyfetch
       
       mat2
