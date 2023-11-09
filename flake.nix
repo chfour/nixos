@@ -22,21 +22,37 @@
           home-manager.useUserPackages = true;
         };
       };
+      defaultNixCfg = { ... }: {
+        nixpkgs.config.allowUnfree = true;
+        nix.settings = {
+          experimental-features = [ "nix-command" "flakes" ];
+          auto-optimise-store = true;
+        };
+      };
       # theres probably a better way to do this lol
       overlays = ./overlays;
     };
-    nixosConfigurations."foxbox" = nixpkgs.lib.nixosSystem rec {
-      system = "x86_64-linux";
-      specialArgs = {
-        pkgs-master = nixpkgs-master.legacyPackages.${system};
+    nixosConfigurations = {
+      "foxbox" = nixpkgs.lib.nixosSystem rec {
+        system = "x86_64-linux";
+        specialArgs = {
+          pkgs-master = nixpkgs-master.legacyPackages.${system};
+        };
+        modules = with self.nixosModules; [
+          overlays defaultNixCfg
+          ./machines/foxbox
+          nixos-hardware.nixosModules.lenovo-thinkpad-e14-intel
+          declarativeHome ./users/chfour
+        ];
       };
-      modules = with self.nixosModules; [
-        overlays
-        ./machines/foxbox
-        nixos-hardware.nixosModules.lenovo-thinkpad-e14-intel
-        declarativeHome
-        ./users/chfour
-      ];
+      "fovps" = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = with self.nixosModules; [
+          overlays defaultNixCfg
+          ./machines/fovps
+          declarativeHome ./users/chfour
+        ];
+      };
     };
   };
 }

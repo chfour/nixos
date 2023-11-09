@@ -7,12 +7,6 @@
   
   networking.hostName = "foxbox";
 
-  nixpkgs.config.allowUnfree = true;
-  nix.settings = {
-    experimental-features = [ "nix-command" "flakes" ];
-    auto-optimise-store = true;
-  };
-
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -36,9 +30,6 @@
     xkbVariant = "";
   };
   console.keyMap = "pl2";
-
-  programs.zsh.enable = true; # todo: get rid of this if possible
-  environment.shells = with pkgs; [ zsh ];
   
   programs.steam.enable = true;
 
