@@ -26,7 +26,7 @@
   systemd.network.enable = true;
   networking.useDHCP = false;
   systemd.network.networks."10-wan" = {
-    matchConfig.Name = "wan";
+    matchConfig.Name = "ens18";
     networkConfig = {
       DHCP = "ipv4";
       IPv6AcceptRA = true;
@@ -35,7 +35,6 @@
 
   services.openssh.enable = true;
   
-
   environment.systemPackages = with pkgs; [
     micro
     wget
