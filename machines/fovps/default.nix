@@ -33,6 +33,12 @@
     };
   };
 
+  security.sudo = {
+    enable = true;
+    wheelNeedsPassword = false;
+    # dont need that anyways + remote nixos-rebuild with remote sudo cant ask for password lol
+  };
+
   services.openssh.enable = true;
   
   environment.systemPackages = with pkgs; [
