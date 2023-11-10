@@ -3,6 +3,7 @@
 {
   imports = [
     ./hardware.nix
+    ./services
   ];
 
   networking.hostName = "fovps";
