@@ -23,6 +23,13 @@ also libvirt
 
 idk what else to say
 
+### `fovps`
+
+this is my vps hosted on contabo's cheapest tier :fire:
+
+at the time of writing i've only configured caddy on it but there
+will be more stuff running on it
+
 ## `users`
 
 yeh
@@ -32,6 +39,10 @@ yeh
 thats me
 
 git, vscode, mpd as a user service, a bunch of packages
+
+gui stuff only gets enabled if there is a gui
+
+there's also a custom zsh dir with a modified af-magic theme
 
 the gnome config has blur-my-shell, runcat, and the appindicator extension, and it gets
 included automatically if gnome is enabled
