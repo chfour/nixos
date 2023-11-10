@@ -20,6 +20,7 @@ in {
     history.size = 50000;
     oh-my-zsh = {
       enable = true;
+      custom = "${./omz-custom}";
       plugins = [ "git" "fzf" "colored-man-pages" ];
       theme = "af-magic";
     };
