@@ -11,6 +11,13 @@ in
   services.caddy.enable = true;
   services.caddy.virtualHosts = {
     "eeep.ee".extraConfig = ''
+      # lol
+      redir /nixos /nixos/ permanent
+      handle_path /nixos/* {
+        redir * https://github.com/chfour/nixos/tree/main{uri}
+      }
+
+      # the usual
       root * ${websiteSource}
       encode zstd gzip
       file_server
