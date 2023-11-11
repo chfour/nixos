@@ -1,4 +1,5 @@
 { pkgs, ... }:
+
 let
   websiteSource = pkgs.fetchFromGitHub {
     owner = "chfour";
@@ -9,8 +10,23 @@ let
 in
 {
   services.caddy.enable = true;
+  services.caddy.extraConfig = ''
+    (errors) {
+      handle_errors {
+      	@custom_err file /{err.status_code}.html /err.html
+      	handle @custom_err {
+      		rewrite * {file_match.relative}
+      		file_server
+      	}
+      	respond "{err.status_code} {err.status_text}
+" # caddy why
+      }
+    }
+  '';
   services.caddy.virtualHosts = {
     "eeep.ee".extraConfig = ''
+      import errors
+    
       # lol
       redir /nixos /nixos/ permanent
       handle_path /nixos/* {
@@ -23,6 +39,15 @@ in
       file_server
     '';
     
+    "files.eeep.ee".extraConfig = ''
+      import errors
+      
+      root * /srv/pub
+      encode zstd gzip
+      file_server {
+        browse ${./browsetemplate.html}
+      }
+    '';
 
 
   };
