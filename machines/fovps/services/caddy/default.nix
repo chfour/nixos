@@ -50,6 +50,7 @@ in
     '';
     # legacy aliases, gotta remove them when that domain expires
     "mitchy.xyz".extraConfig = "redir * https://eeep.ee{uri}";
+    "files.mitchy.xyz".extraConfig = "redir * https://files.eeep.ee{uri}";
   };
   networking.firewall.allowedTCPPorts = [ 80 443 ];
 }
