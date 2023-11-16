@@ -7,14 +7,14 @@
         src = super.fetchFromGitHub {
           owner = "AlexandreRouma";
           repo = "SDRPlusPlus";
-          rev = "15ad065feb4052a711181ae7fc8e82e8d119e4df";
-          hash = "sha256-ewjDMbHbsRIV9pn3cvNb0ccF36nVOzwES1oBphlDxkA=";
+          rev = "794d6ff5acf66d5da7fb7fceba7b952c95305960";
+          hash = "sha256-usP5WUXxIJkr/y4X8TXioJKamY17RRfMnwVHRUotKZk=";
         };
         buildInputs = old.buildInputs ++ (with pkgs; [ zstd ]);
       });
     })
     (self: super: {
-      sdrpp = super.sdrpp.override { weather_sat_decoder = false; };
+      sdrpp = super.sdrpp.override { weather_sat_decoder = false; m17_decoder = true; };
     })
     (self: super: {
       cnping = super.cnping.overrideAttrs (old: {
