@@ -20,11 +20,19 @@ in
     "org/gnome/shell/extensions/runcat" = {
       idle-threshold = 5; # give them some eepy time
     };
+    
     "org/gnome/shell/extensions/blur-my-shell" = {
-      brightness = 1.0;
+      brightness = 0.60;
+      sigma = 30; # strength
       color-and-noise = false; # performance very yes
       hacks-level = 0; # "highest performance" option
     };
+    "org/gnome/shell/extensions/blur-my-shell/panel".blur = false;
+    "org/gnome/shell/extensions/blur-my-shell/overview" = {
+      blur = true;
+      style-components = 0;
+    };
+    "org/gnome/shell/extensions/blur-my-shell/applications".blur = false;
     
     # set the gtk4 theme/scheme (i also set the gtk3 theme later)
     "org/gnome/desktop/interface" = {
