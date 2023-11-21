@@ -1,12 +1,12 @@
 { pkgs, lib, ... }:
 
-let
-  mkShortcuts = shortcuts: # wow this is a mess
-    builtins.listToAttrs (lib.lists.imap0 (i: v: ({ name = "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom${builtins.toString i}"; value = v; })) shortcuts)
-    // { "org/gnome/settings-daemon/plugins/media-keys".custom-keybindings = lib.lists.imap0 (i: v: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom${builtins.toString i}/") shortcuts; };
-in
 {
-  dconf.settings = {
+  dconf.settings = let
+    appShortcuts = [
+      rec { name = command; binding = "<Super>Return"; command = "gnome-terminal"; }
+      rec { name = command; binding = "<Super>period"; command = "gnome-characters"; }
+    ];
+  in {
     # extension prefs
     "org/gnome/shell" = {
       disable-user-extensions = false;
@@ -78,12 +78,9 @@ in
     # shortcuts
     "org/gnome/settings-daemon/plugins/media-keys" = {
       home = [ "<Super>e" ];
+      custom-keybindings = lib.lists.imap0 (i: v: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom${builtins.toString i}/") appShortcuts;
     };
-  } // mkShortcuts [
-    # also shortcuts
-    rec { name = command; binding = "<Super>Return"; command = "gnome-terminal"; }
-    rec { name = command; binding = "<Super>period"; command = "gnome-characters"; }
-  ];
+  } // builtins.listToAttrs (lib.lists.imap0 (i: v: ({ name = "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom${builtins.toString i}"; value = v; })) appShortcuts); # still kinda ugly lol
 
   gtk = {
     enable = true;
