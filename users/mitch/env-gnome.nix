@@ -22,7 +22,7 @@ in
     };
     
     "org/gnome/shell/extensions/blur-my-shell" = {
-      brightness = 0.60;
+      brightness = 1.0; # this seems to affect the blur on the lockscreen
       sigma = 30; # strength
       color-and-noise = false; # performance very yes
       hacks-level = 0; # "highest performance" option
@@ -31,6 +31,9 @@ in
     "org/gnome/shell/extensions/blur-my-shell/overview" = {
       blur = true;
       style-components = 0;
+      customize = true;
+      brightness = 0.60;
+      sigma = 30;
     };
     "org/gnome/shell/extensions/blur-my-shell/applications".blur = false;
     
