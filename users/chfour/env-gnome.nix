@@ -13,29 +13,46 @@
       enabled-extensions = [
         "appindicatorsupport@rgcjonas.gmail.com"
         "runcat@kolesnikov.se" # run lil fella!!! also features eepy
-        "blur-my-shell@aunetx" # blur pretty,, pretty blur ..................
+        "blur-my-shell@aunetx" # blur pretty,, pretty blur ................
       ];
+    };
+
+    "org/gnome/shell/extensions/appindicator" = {
+      tray-pos = "right";
     };
     
     "org/gnome/shell/extensions/runcat" = {
       idle-threshold = 5; # give them some eepy time
+      displaying-items = "character-and-percentage";
     };
     
     "org/gnome/shell/extensions/blur-my-shell" = {
-      brightness = 1.0; # this seems to affect the blur on the lockscreen
+      brightness = 1.0;
       sigma = 30; # strength
-      color-and-noise = false; # performance very yes
+      color-and-noise = false; # performance equals very yes
       hacks-level = 0; # "highest performance" option
     };
-    "org/gnome/shell/extensions/blur-my-shell/panel".blur = false;
+    "org/gnome/shell/extensions/blur-my-shell/panel" = {
+      blur = false;
+    };
     "org/gnome/shell/extensions/blur-my-shell/overview" = {
+      # overview background
       blur = true;
-      style-components = 0;
+      style-components = 0; # do not style
       customize = true;
       brightness = 0.60;
       sigma = 30;
     };
-    "org/gnome/shell/extensions/blur-my-shell/applications".blur = false;
+    "org/gnome/shell/extensions/blur-my-shell/lockscreen" = {
+      blur = true;
+    };
+    "org/gnome/shell/extensions/blur-my-shell/screenshot" = {
+      # screenshotter window selector
+      blur = true;
+    };
+    "org/gnome/shell/extensions/blur-my-shell/applications" = {
+      blur = false;
+    };
     
     # set the gtk4 theme/scheme (i also set the gtk3 theme later)
     "org/gnome/desktop/interface" = {
