@@ -24,6 +24,7 @@
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/46f61b03-25b1-4ca0-9c88-43afa655b053";
     fsType = "ext4";
+    options = [ "defaults" "relatime" ];
   };
 
   fileSystems."/boot" = {
@@ -34,10 +35,11 @@
   fileSystems."/home" = {
     device = "/dev/disk/by-uuid/ecaee476-5e34-45a7-9c35-a219272e53e0";
     fsType = "ext4";
+    options = [ "defaults" "relatime" ];
   };
 
   fileSystems."/tmp" = {
-    device = "none";
+    device = "tmpfs";
     fsType = "tmpfs";
     options = [ "defaults" "size=2G" "mode=777" ];
   };
@@ -51,5 +53,4 @@
   # still possible to use this option, but it's recommended to use it in conjunction
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
-
 }
