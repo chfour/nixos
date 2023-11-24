@@ -110,9 +110,8 @@ in {
     (lib.optionals isGui [ # stuff i use on desktops
       firefox
       keepassxc
-      (discord-canary.override {
-        withOpenASAR = true;
-      })
+      # (discord-canary.override { withOpenASAR = true; })
+      vesktop
       helvum
       inkscape gimp
       obs-studio
