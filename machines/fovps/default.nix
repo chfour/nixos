@@ -11,6 +11,13 @@
   
   boot.tmp.cleanOnBoot = true;
 
+  nix.gc = {
+    automatic = true;
+    dates = "Mon 3:00";
+    randomizedDelaySec = "2h";
+    options = "--delete-older-than 14d";
+  };
+
   time.timeZone = "Europe/Warsaw";
   i18n.defaultLocale = "en_US.UTF-8";
   i18n.extraLocaleSettings = {
