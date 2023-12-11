@@ -4,6 +4,7 @@
   imports = [
     ./hardware.nix
     ./services
+    ./networking.nix
   ];
 
   networking.hostName = "fovps";
@@ -22,16 +23,6 @@
     LC_PAPER = "C.UTF-8";
     LC_TELEPHONE = "C.UTF-8";
     LC_TIME = "C.UTF-8";
-  };
-
-  systemd.network.enable = true;
-  networking.useDHCP = false;
-  systemd.network.networks."10-wan" = {
-    matchConfig.Name = "ens18";
-    networkConfig = {
-      DHCP = "ipv4";
-      IPv6AcceptRA = true;
-    };
   };
 
   security.sudo = {
