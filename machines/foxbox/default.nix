@@ -120,7 +120,7 @@
     drivers = with pkgs; [ hplip ];
   };
   services.avahi.enable = true;
-  services.avahi.nssmdns = true;
+  services.avahi.nssmdns4 = true;
 
   sound.enable = true;
   hardware.pulseaudio.enable = false;
