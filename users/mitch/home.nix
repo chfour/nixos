@@ -47,6 +47,7 @@ in {
     package = pkgs.vscodium;
     
     extensions = with pkgs.vscode-extensions; [
+      pkief.material-icon-theme
       jnoortheen.nix-ide
       ms-python.python # DEBUGPY WHY MUST YOU BE SO *STUPID* (sometimes)
       #ms-vscode.cpptools # :troll:
@@ -64,6 +65,8 @@ in {
       "editor.fontFamily" = "\'Terminus (TTF)\', \'Droid Sans Mono\', \'monospace\', monospace";
       "editor.fontSize" = 16;
       "workbench.colorTheme" = "Monokai";
+      "workbench.iconTheme" = "material-icon-theme";
+      "files.eol" = "\n";
       "editor.cursorBlinking" = "phase";
       "clangd.path" = (lib.getOutput "bin" pkgs.clang-tools.overrideAttrs (old: { clang = pkgs.clang_multi; })) + "/bin/clangd"; # i guess?
       #"clangd.arguments" = [ "-I${lib.getOutput "bin" pkgs.pkgsi686Linux.gcc-unwrapped}/include/" ]; # no worky i thought it would
