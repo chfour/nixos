@@ -100,7 +100,7 @@ in {
       btop
       micro
       tree file usbutils pciutils
-      jq ffmpeg imagemagick
+      jq ffmpeg_6-full imagemagick
       sqlite-interactive
 
       fzf
