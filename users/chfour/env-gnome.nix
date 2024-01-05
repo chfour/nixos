@@ -1,6 +1,16 @@
 { pkgs, lib, ... }:
 
 {
+  home.packages = with pkgs.gnomeExtensions; [
+    appindicator
+    runcat
+    blur-my-shell
+    caffeine
+  ] ++ (with pkgs; [
+    gnome.gnome-terminal
+    #blackbox-terminal # this thing keeps crashing and has generally started to piss me off
+  ]);
+  
   dconf.settings = let
     appShortcuts = [
       rec { name = command; binding = "<Super>Return"; command = "gnome-terminal"; }
@@ -14,6 +24,7 @@
         "appindicatorsupport@rgcjonas.gmail.com"
         "runcat@kolesnikov.se" # run lil fella!!! also features eepy
         "blur-my-shell@aunetx" # blur pretty,, pretty blur ................
+        "caffeine@patapon.info"
       ];
     };
 
@@ -113,12 +124,4 @@
       package = pkgs.vanilla-dmz;
     };
   };
-
-  home.packages = with pkgs; [
-    gnome.gnome-terminal
-    #blackbox-terminal # this thing keeps crashing and has generally started to piss me off
-    gnomeExtensions.appindicator
-    gnomeExtensions.runcat
-    gnomeExtensions.blur-my-shell
-  ];
 }
