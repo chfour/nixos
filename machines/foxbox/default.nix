@@ -3,6 +3,7 @@
 {
   imports = [
     ./hardware.nix
+    ../_common/env-gnome.nix
   ];
   
   networking.hostName = "foxbox";
@@ -83,37 +84,6 @@
     # teehee
     SUDO_PROMPT = "[sudo] programming socks required beyond this point: ";
   };
-
-  
-  services.xserver.enable = true;
-  
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome = {
-    enable = true;
-    extraGSettingsOverrides = ''
-      # hell naw to automount and autorun
-      # (like ???what this isnt windows)
-      [org.gnome.desktop.media-handling]
-      automount=false
-      automount-open=false
-      autorun-never=true
-
-      # exclude node_modules from tracker
-      # seriously DID MAKING IT A DOT-DIR
-      # NEVER COME ACROSS THEIR MINDS CMON
-      [org.freedesktop.Tracker.Miner.Files]
-      ignored-directories-with-content='node_modules'
-    '';
-    extraGSettingsOverridePackages = with pkgs; [
-      gnome.gnome-shell
-      tracker-miners
-    ];
-  };
-  environment.gnome.excludePackages = with pkgs; [
-    gnome.geary gnome-tour gnome.gnome-contacts
-    gnome.gnome-music gnome-photos
-    gnome-console # important!! bring your own terminal emulator
-  ];
   
   services.printing = {
     enable = true;
