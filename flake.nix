@@ -22,12 +22,13 @@
           home-manager.useUserPackages = true;
         };
       };
-      defaultNixCfg = { ... }: {
+      defaults = { ... }: {
         nixpkgs.config.allowUnfree = true;
         nix.settings = {
           experimental-features = [ "nix-command" "flakes" ];
           auto-optimise-store = true;
         };
+        environment.stub-ld.enable = false; # 24.05
       };
       # theres probably a better way to do this lol
       overlays = ./overlays;
@@ -39,7 +40,7 @@
           pkgs-master = nixpkgs-master.legacyPackages.${system};
         };
         modules = with self.nixosModules; [
-          overlays defaultNixCfg
+          overlays defaults
           ./machines/foxbox
           nixos-hardware.nixosModules.lenovo-thinkpad-e14-intel
           declarativeHome ./users/chfour
@@ -48,7 +49,7 @@
       "fovps" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = with self.nixosModules; [
-          overlays defaultNixCfg
+          overlays defaults
           ./machines/fovps
           declarativeHome ./users/chfour
         ];
