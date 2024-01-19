@@ -3,5 +3,6 @@
 {
   imports = [
     ./caddy
+    ./cloudlog.nix
   ];
 }
