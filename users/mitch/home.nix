@@ -49,34 +49,24 @@ in {
     extensions = with pkgs.vscode-extensions; [
       pkief.material-icon-theme
       jnoortheen.nix-ide
-      ms-python.python # DEBUGPY WHY MUST YOU BE SO *STUPID* (sometimes)
+      ms-python.python
       #ms-vscode.cpptools # :troll:
       llvm-vs-code-extensions.vscode-clangd
-    #] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-    #  {
-    #    name = "platformio-ide";
-    #    publisher = "platformio";
-    #    version = "3.3.1";
-    #    sha256 = "sha256-fIQCG3S5CnqoZFAlwbDG740Z/nIFMQRAYY5/LnRNMSo=";
-    #  }
+      vadimcn.vscode-lldb
+      ms-vscode.cmake-tools
+      arrterian.nix-env-selector
     ];
 
     userSettings = {
       "editor.fontFamily" = "\'Terminus (TTF)\', \'Droid Sans Mono\', \'monospace\', monospace";
       "editor.fontSize" = 16;
+      "editor.minimap.enabled" = false;
       "workbench.colorTheme" = "Monokai";
       "workbench.iconTheme" = "material-icon-theme";
       "files.eol" = "\n";
       "editor.cursorBlinking" = "phase";
       "clangd.path" = (lib.getOutput "bin" pkgs.clang-tools.overrideAttrs (old: { clang = pkgs.clang_multi; })) + "/bin/clangd"; # i guess?
-      #"clangd.arguments" = [ "-I${lib.getOutput "bin" pkgs.pkgsi686Linux.gcc-unwrapped}/include/" ]; # no worky i thought it would
-      #"platformio-ide.customPATH" = lib.makeBinPath (with pkgs; [ python311.withPackages (p: with p; [ platformio-core ]) platformio ]);
-      #"platformio-ide.useBuiltinPIOCore" = false;
-      #"platformio-ide.useBuiltinPython" = false;
-      #"platformio-ide.pioHomeServerHttpPort" = 8008;
-      #"C_Cpp.intelliSenseEngine" = "disabled";
-      #"C_Cpp.default.compilerPath" = (lib.getOutput "bin" pkgs.clang_16) + "/bin/clang";
-      # yea so all that didnt work
+      "cmake.configureOnOpen" = false;
     };
   };
 
