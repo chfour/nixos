@@ -53,8 +53,9 @@ in {
       #ms-vscode.cpptools # :troll:
       llvm-vs-code-extensions.vscode-clangd
       vadimcn.vscode-lldb
-      ms-vscode.cmake-tools
+      ms-vscode.cmake-tools twxs.cmake
       arrterian.nix-env-selector
+      donjayamanne.githistory
     ];
 
     userSettings = {
