@@ -3,18 +3,7 @@
 {
   nixpkgs.overlays = [
     (self: super: {
-      sdrpp = super.sdrpp.overrideAttrs (old: {
-        src = super.fetchFromGitHub {
-          owner = "AlexandreRouma";
-          repo = "SDRPlusPlus";
-          rev = "794d6ff5acf66d5da7fb7fceba7b952c95305960";
-          hash = "sha256-usP5WUXxIJkr/y4X8TXioJKamY17RRfMnwVHRUotKZk=";
-        };
-        buildInputs = old.buildInputs ++ (with pkgs; [ zstd ]);
-      });
-    })
-    (self: super: {
-      sdrpp = super.sdrpp.override { weather_sat_decoder = false; m17_decoder = true; };
+      sdrpp = super.sdrpp.override { m17_decoder = true; };
     })
     (self: super: {
       cnping = super.cnping.overrideAttrs (old: {
