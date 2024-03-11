@@ -26,9 +26,9 @@
     LC_TELEPHONE = "C.UTF-8";
     LC_TIME = "C.UTF-8";
   };
-  services.xserver = {
+  services.xserver.xkb = {
     layout = "pl";
-    xkbVariant = "";
+    variant = "";
   };
   console.keyMap = "pl2";
   
