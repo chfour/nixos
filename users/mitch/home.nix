@@ -103,6 +103,7 @@ in {
     ]
     (lib.optionals isGui [ # stuff i use on desktops
       firefox
+      libreoffice
       keepassxc
       # (discord-canary.override { withOpenASAR = true; })
       vesktop
