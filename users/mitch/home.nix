@@ -45,7 +45,7 @@ in {
   programs.vscode = {
     enable = isGui;
     package = pkgs.vscodium;
-    
+
     extensions = with pkgs.vscode-extensions; [
       pkief.material-icon-theme
       jnoortheen.nix-ide
@@ -56,6 +56,16 @@ in {
       ms-vscode.cmake-tools twxs.cmake
       arrterian.nix-env-selector
       donjayamanne.githistory
+    ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+      {
+        publisher = "mesonbuild"; name = "mesonbuild";
+        version = "1.22.0";
+        sha256 = "xws1dgivQgGIPe3dV7MbfrcHXrmsyYI2Ji5wLViAR6k=";
+      }
+    ];
+
+    keybindings = [
+      { key = "f7"; "command" = "mesonbuild.build"; }
     ];
 
     userSettings = {
@@ -68,6 +78,10 @@ in {
       "editor.cursorBlinking" = "phase";
       "clangd.path" = (lib.getOutput "bin" pkgs.clang-tools.overrideAttrs (old: { clang = pkgs.clang_multi; })) + "/bin/clangd"; # i guess?
       "cmake.configureOnOpen" = false;
+      "mesonbuild.buildFolder" = "build";
+      "mesonbuild.muonPath" = pkgs.muon;
+      "mesonbuild.languageServer" = null;
+      "mesonbuild.downloadLanguageServer" = false;
     };
   };
 
