@@ -15,13 +15,17 @@ in {
     EDITOR = "micro";
   };
 
+  programs.fzf = {
+    enable = true;
+    enableZshIntegration = true;
+  };
   programs.zsh = {
     enable = true;
     history.size = 50000;
     oh-my-zsh = {
       enable = true;
       custom = "${./omz-custom}";
-      plugins = [ "git" "fzf" "colored-man-pages" ];
+      plugins = [ "git" "colored-man-pages" ];
       theme = "af-magic";
     };
     syntaxHighlighting.enable = true;
