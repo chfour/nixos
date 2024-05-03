@@ -111,8 +111,8 @@ in {
       tree file usbutils pciutils
       jq ffmpeg_6-full imagemagick
       sqlite-interactive
-
       fzf
+      socat nmap
       
       hyfetch
       
@@ -129,7 +129,9 @@ in {
       inkscape gimp
       obs-studio
       prismlauncher
-      mpv sox
+      celluloid
+      sox
+      beets
       platformio
     
       sdrpp
@@ -137,7 +139,7 @@ in {
       gpredict
       #chirp # lol lmao
     ])
-    (lib.optional config.services.mpd.enable mpdevil)    
+    (lib.optionals config.services.mpd.enable [ mpdevil mpc-cli ])    
   ]);
   
   programs.home-manager.enable = true;
