@@ -39,6 +39,7 @@
   };
 
   services.openssh.enable = true;
+  services.openssh.ports = [ 62169 ];
   
   environment.systemPackages = with pkgs; [
     micro
