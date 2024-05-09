@@ -14,6 +14,8 @@
   
   outputs = { self, nixpkgs, nixpkgs-master, nixos-hardware, home-manager, ... }: {
     nixosModules = {
+      minecraft = ./modules/minecraft.nix;
+      
       declarativeHome = { ... }: {
         # big thank you to https://determinate.systems/posts/declarative-gnome-configuration-with-nixos !!!
         imports = [ home-manager.nixosModules.home-manager ];
@@ -52,6 +54,7 @@
           overlays defaults
           ./machines/fovps
           declarativeHome ./users/chfour
+          minecraft
         ];
       };
     };
