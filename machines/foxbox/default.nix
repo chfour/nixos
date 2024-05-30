@@ -39,7 +39,16 @@
     enableSSHSupport = true;
   };
 
+  services.pcscd.enable = true;
+
   hardware.rtl-sdr.enable = true;
+
+  services.udev.packages = [
+    (pkgs.writeTextDir "/etc/udev/rules.d/usbasp.rules" ''
+      # USBasp
+      ATTRS{idVendor}=="16c0", ATTRS{idProduct}=="05dc", MODE="0666", GROUP="dialout"
+    '')
+  ];
 
   programs.adb.enable = true;
 
