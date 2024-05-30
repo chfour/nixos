@@ -118,10 +118,11 @@
       name = "adw-gtk3-dark";
       package = pkgs.adw-gtk3;
     };
-    
-    cursorTheme = {
-      name = "Vanilla-DMZ";
-      package = pkgs.vanilla-dmz;
-    };
+
+    # buggy?
+    #cursorTheme = {
+    #  name = "Vanilla-DMZ";
+    #  package = pkgs.vanilla-dmz;
+    #};
   };
 }
