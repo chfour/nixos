@@ -116,7 +116,17 @@
     # gtk3 theme
     theme = {
       name = "adw-gtk3-dark";
-      package = pkgs.adw-gtk3;
+      package = pkgs.stdenv.mkDerivation rec {
+        pname = "adw-gtk3";
+        version = src.version;
+        src = pkgs.adw-gtk3;
+        installPhase = ''
+          mkdir -p $out
+          cp -r * $out/
+          # ensure only the gtk3 theme is there (the gtk4 one seems to be breaking things)
+          rm -rf $out/share/themes/*/gtk-4.0
+        '';
+      };
     };
 
     # buggy?
