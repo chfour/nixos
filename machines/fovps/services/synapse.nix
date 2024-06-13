@@ -13,12 +13,16 @@ in
   services.matrix-synapse.enable = true;
   services.matrix-synapse.withJemalloc = true; # hell why not
 
-  services.matrix-synapse.settings.server_name = domain;
-  services.matrix-synapse.settings.enableRegistrationScript = true;
+  services.matrix-synapse.settings = {
+    server_name = domain;
+    enableRegistrationScript = true;
 
-  # automatically created
-  services.matrix-synapse.settings.registration_shared_secret_path = "${synapse.dataDir}/.env.synapse-reg";
+    max_upload_size = "200M";
 
+    # automatically created
+    registration_shared_secret_path = "${synapse.dataDir}/.env.synapse-reg";
+  };
+  
   #services.coturn = {
   #  enable = true;
   #  use-auth-secret = true;
