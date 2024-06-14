@@ -7,13 +7,14 @@
     blur-my-shell
     caffeine
   ] ++ (with pkgs; [
-    gnome.gnome-terminal
+    ptyxis
+    #gnome.gnome-terminal
     #blackbox-terminal # this thing keeps crashing and has generally started to piss me off
   ]);
   
   dconf.settings = let
     appShortcuts = [
-      rec { name = command; binding = "<Super>Return"; command = "gnome-terminal"; }
+      rec { name = command; binding = "<Super>Return"; command = "ptyxis --new-window"; }
       rec { name = command; binding = "<Super>period"; command = "gnome-characters"; }
     ];
   in {
