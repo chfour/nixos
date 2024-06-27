@@ -48,6 +48,10 @@
       # USBasp
       ATTRS{idVendor}=="16c0", ATTRS{idProduct}=="05dc", MODE="0666", GROUP="dialout"
     '')
+    (pkgs.writeTextDir "/etc/udev/rules.d/fx2lafw.rules" ''
+      # aliexpress logic analyzer
+      ATTRS{idVendor}=="1d50", ATTRS{idProduct}=="608c", MODE="0666", GROUP="dialout"
+    '')
   ];
 
   programs.adb.enable = true;

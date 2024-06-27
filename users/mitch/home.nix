@@ -138,6 +138,8 @@ in {
       rtl-sdr
       gpredict
       #chirp # lol lmao
+
+      pulseview
     ])
     (lib.optionals config.services.mpd.enable [ mpdevil mpc-cli ])    
   ]);
