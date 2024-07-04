@@ -16,7 +16,7 @@
       "2a02:c207:2177:8888::1/64"
     ];
     routes = [
-      { routeConfig.Gateway = "fe80::1"; }
+      { Gateway = "fe80::1"; }
     ];
     dns = [
       "2a02:c207::1:53"
