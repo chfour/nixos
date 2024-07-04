@@ -25,13 +25,13 @@
     ];
   };
   environment.gnome.excludePackages = with pkgs; [
-    gnome.geary gnome-tour gnome.gnome-contacts
+    geary gnome-tour gnome.gnome-contacts
     gnome.gnome-music gnome-photos
     gnome-console # important!! bring your own terminal emulator
   ];
 
   environment.systemPackages = with pkgs; [
-    gnome.nautilus-python
+    nautilus-python
     nautilus-open-any-terminal
   ];
 
