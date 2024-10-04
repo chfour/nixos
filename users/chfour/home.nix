@@ -8,8 +8,8 @@ in {
     (lib.optional osConfig.services.xserver.desktopManager.gnome.enable ./env-gnome.nix)
   ];
   
-  home.username = "mitch";
-  home.homeDirectory = "/home/mitch";
+  home.username = "chfour";
+  home.homeDirectory = "/home/chfour";
 
   home.sessionVariables = {
     EDITOR = "micro";

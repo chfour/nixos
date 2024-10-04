@@ -45,7 +45,7 @@
           overlays defaults
           ./machines/foxbox
           nixos-hardware.nixosModules.lenovo-thinkpad-e14-intel
-          declarativeHome ./users/mitch
+          declarativeHome ./users/chfour
         ];
       };
       "fovps" = nixpkgs.lib.nixosSystem {
@@ -53,7 +53,7 @@
         modules = with self.nixosModules; [
           overlays defaults
           ./machines/fovps
-          declarativeHome ./users/mitch
+          declarativeHome ./users/chfour
           minecraft
         ];
       };
