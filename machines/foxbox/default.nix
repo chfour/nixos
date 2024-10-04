@@ -105,7 +105,7 @@
   services.avahi.enable = true;
   services.avahi.nssmdns4 = true;
 
-  sound.enable = true;
+  #sound.enable = true; # apparently gone
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
