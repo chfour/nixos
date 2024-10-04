@@ -11,6 +11,11 @@
     script = "${pkgs.kmod}/bin/modprobe -r psmouse && ${pkgs.kmod}/bin/modprobe psmouse";
   };
 
+  boot.kernelParameters = [
+    "module_blacklist=nouveau"
+    ""
+  ];
+
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
