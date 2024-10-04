@@ -20,13 +20,13 @@
       ignored-directories-with-content='node_modules'
     '';
     extraGSettingsOverridePackages = with pkgs; [
-      gnome.gnome-shell
+      gnome-shell
       tracker-miners
     ];
   };
   environment.gnome.excludePackages = with pkgs; [
-    geary gnome-tour gnome.gnome-contacts
-    gnome.gnome-music gnome-photos
+    geary gnome-tour gnome-contacts
+    gnome-music gnome-photos
     gnome-console # important!! bring your own terminal emulator
   ];
 
