@@ -18,6 +18,14 @@
       rec { name = command; binding = "<Super>period"; command = "gnome-characters"; }
     ];
   in {
+    # apps
+    "org/gnome/Ptyxis" = {
+      use-system-font = false;
+      font-name = "Terminus 10";
+      restore-window-size = false;
+      default-columns = 80; default-rows = 24;
+    };
+    
     # extension prefs
     "org/gnome/shell" = {
       disable-user-extensions = false;
@@ -73,7 +81,7 @@
 
     # enable minimize, maximize buttons
     "org/gnome/desktop/wm/preferences" = {
-      button-layout=":appmenu,minimize,close";
+      button-layout = ":appmenu,minimize,close";
     };
 
     # wm tweaks
@@ -105,6 +113,13 @@
     };
     
     # shortcuts
+    "org/gnome/desktop/wm/keybindings" = {
+      switch-windows = [ "<Alt>Tab" ];
+      switch-windows-backward = [ "<Shift><Alt>Tab" ];
+      switch-applications = [ "<Super>Tab" ];
+      switch-applications-backward = [ "<Shift><Super>Tab" ];
+    };
+    
     "org/gnome/settings-daemon/plugins/media-keys" = {
       home = [ "<Super>e" ];
       custom-keybindings = lib.lists.imap0 (i: v: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom${builtins.toString i}/") appShortcuts;
