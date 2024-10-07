@@ -25,6 +25,12 @@
       restore-window-size = false;
       default-columns = 80; default-rows = 24;
     };
+    "org/gnome/TextEditor" = {
+      restore-session = false;
+      highlight-current-line = true;
+      use-system-font = false;
+      custom-font = "Terminus 11";
+    };
 
     # extension prefs
     "org/gnome/shell" = {
