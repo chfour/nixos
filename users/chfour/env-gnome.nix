@@ -11,7 +11,7 @@
     #gnome.gnome-terminal
     #blackbox-terminal # this thing keeps crashing and has generally started to piss me off
   ]);
-  
+
   dconf.settings = let
     appShortcuts = [
       rec { name = command; binding = "<Super>Return"; command = "ptyxis --new-window"; }
@@ -25,7 +25,7 @@
       restore-window-size = false;
       default-columns = 80; default-rows = 24;
     };
-    
+
     # extension prefs
     "org/gnome/shell" = {
       disable-user-extensions = false;
@@ -40,12 +40,12 @@
     "org/gnome/shell/extensions/appindicator" = {
       tray-pos = "right";
     };
-    
+
     "org/gnome/shell/extensions/runcat" = {
       idle-threshold = 5; # give them some eepy time
       displaying-items = "character-and-percentage";
     };
-    
+
     "org/gnome/shell/extensions/blur-my-shell" = {
       brightness = 1.0;
       sigma = 30; # strength
@@ -73,10 +73,12 @@
     "org/gnome/shell/extensions/blur-my-shell/applications" = {
       blur = false;
     };
-    
-    # set the gtk4 theme/scheme (i also set the gtk3 theme later)
+
     "org/gnome/desktop/interface" = {
+      # gtk4 theme/scheme (i also set the gtk3 theme later)
       color-scheme = "prefer-dark";
+
+      show-battery-percentage = true;
     };
 
     # enable minimize, maximize buttons
@@ -111,7 +113,7 @@
       # pressing it doesn't seem to do anything
       xkb-options = ["terminate:ctrl_alt_bksp" "lv3:ralt_switch" "compose:sclk"];
     };
-    
+
     # shortcuts
     "org/gnome/desktop/wm/keybindings" = {
       switch-windows = [ "<Alt>Tab" ];
@@ -119,7 +121,7 @@
       switch-applications = [ "<Super>Tab" ];
       switch-applications-backward = [ "<Shift><Super>Tab" ];
     };
-    
+
     "org/gnome/settings-daemon/plugins/media-keys" = {
       home = [ "<Super>e" ];
       custom-keybindings = lib.lists.imap0 (i: v: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom${builtins.toString i}/") appShortcuts;
