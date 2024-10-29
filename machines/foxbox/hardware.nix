@@ -11,11 +11,16 @@
     script = "${pkgs.kmod}/bin/modprobe -r psmouse && ${pkgs.kmod}/bin/modprobe psmouse";
   };
 
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = false; # do not turn on bluetooth at boot
+  };
+
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  
+
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-  
+
   boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];

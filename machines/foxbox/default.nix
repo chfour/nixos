@@ -5,14 +5,14 @@
     ./hardware.nix
     ../_common/env-gnome.nix
   ];
-  
+
   networking.hostName = "foxbox";
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  
+
   time.timeZone = "Europe/Warsaw";
   i18n.defaultLocale = "en_US.UTF-8";
   i18n.extraLocaleSettings = {
@@ -31,7 +31,7 @@
     variant = "";
   };
   console.keyMap = "pl2";
-  
+
   programs.steam.enable = true;
 
   programs.gnupg.agent = {
@@ -57,14 +57,18 @@
   programs.adb.enable = true;
 
   #services.flatpak.enable = true; # ugh
-  
+
+  documentation.dev.enable = true;
+
   environment.systemPackages = with pkgs; [
     micro wl-clipboard
     curlHTTP3
     wget fzf
     cnping # this has to be here because security.wrappers.*
     htop
-    
+
+    man-pages man-pages-posix
+
     pinentry-curses # gnupg weirdness
     virt-manager
     wine
@@ -77,27 +81,13 @@
     capabilities = "cap_net_raw+ep";
   };
 
-  fonts = {
-    packages = with pkgs; [
-      noto-fonts
-      liberation_ttf
-      terminus_font
-      terminus_font_ttf
-      fira
-      unifont
-      twitter-color-emoji # the non-svg variant cuz that didnt work
-    ];
-    fontconfig.defaultFonts = {
-      # wow this is so much simpler than on arch holy shit
-      emoji = [ "Twitter Color Emoji" ];
-    };
-  };
+  fonts.enableDefaultPackages = true;
 
   environment.variables = {
     # teehee
     SUDO_PROMPT = "[sudo] programming socks required beyond this point: ";
   };
-  
+
   services.printing = {
     enable = true;
     drivers = with pkgs; [ hplip ];
@@ -116,7 +106,7 @@
     #jack.enable = true;
     wireplumber.enable = true;
   };
-  
+
   networking.networkmanager.enable = true;
 
   virtualisation.libvirtd = {

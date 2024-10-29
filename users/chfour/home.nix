@@ -7,7 +7,7 @@ in {
   imports = builtins.concatLists [
     (lib.optional osConfig.services.xserver.desktopManager.gnome.enable ./env-gnome.nix)
   ];
-  
+
   home.username = "chfour";
   home.homeDirectory = "/home/chfour";
 
@@ -30,13 +30,13 @@ in {
     };
     syntaxHighlighting.enable = true;
   };
-  
+
   programs.git = {
     enable = true;
-    
+
     userName = "chfour";
     userEmail = "chfourchfour@protonmail.com";
-    
+
     signing.signByDefault = true;
     signing.key = "BD2EC4C0608DED53";
 
@@ -90,11 +90,11 @@ in {
   };
 
   xdg.userDirs.enable = isGui;
-  
+
   services.mpd = {
     enable = isGui;
     network.startWhenNeeded = true;
-    
+
     # holy shit :sob:
     extraConfig = ''
       ${lib.strings.optionalString osConfig.services.pipewire.enable ''audio_output {
@@ -109,13 +109,13 @@ in {
       btop
       micro
       tree file usbutils pciutils
-      jq ffmpeg_6-full imagemagick
+      jq ffmpeg-full imagemagick
       sqlite-interactive
       fzf
       socat nmap
-      
+
       hyfetch
-      
+
       mat2
       yt-dlp
     ]
@@ -127,23 +127,35 @@ in {
       vesktop
       helvum
       inkscape gimp
+      blender
       obs-studio
       prismlauncher
       celluloid
       sox
       beets
       platformio
-    
+
       sdrpp
       rtl-sdr
       gpredict
       #chirp # lol lmao
-
       pulseview
+
+      # fonts
+      noto-fonts
+      twitter-color-emoji
+      fira
+      terminus_font terminus_font_ttf
+      monaspace
     ])
-    (lib.optionals config.services.mpd.enable [ mpdevil mpc-cli ])    
+    (lib.optionals config.services.mpd.enable [ mpdevil mpc-cli ])
   ]);
-  
+
+  fonts.fontconfig = {
+    enable = isGui;
+    defaultFonts.emoji = [ "Twitter Color Emoji" ];
+  };
+
   programs.home-manager.enable = true;
   home.stateVersion = "23.05";
 }
