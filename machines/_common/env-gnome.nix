@@ -2,7 +2,7 @@
 
 {
   services.xserver.enable = true;
-    
+
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome = {
     enable = true;
@@ -28,6 +28,7 @@
     geary gnome-tour gnome-contacts
     gnome-music gnome-photos
     gnome-console # important!! bring your own terminal emulator
+    totem
   ];
 
   environment.systemPackages = with pkgs; [

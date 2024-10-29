@@ -6,7 +6,7 @@
   users.groups = {
     chfour = { gid = 1000; };
   };
-  
+
   users.users."chfour" = {
     isNormalUser = true;
     description = "chfour";
