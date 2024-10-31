@@ -31,10 +31,11 @@
     totem
   ];
 
-  environment.systemPackages = with pkgs; [
-    nautilus-python
-    nautilus-open-any-terminal
-  ];
+  #environment.systemPackages = with pkgs; [
+  #  nautilus-python
+  #  nautilus-open-any-terminal
+  #];
+  programs.nautilus-open-any-terminal.enable = true;
 
   # this enables the ozone stuff on wayland for chromium and electron and shit
   environment.variables.NIXOS_OZONE_WL = "1";

@@ -24,13 +24,26 @@
       font-name = "Terminus 10";
       restore-window-size = false;
       default-columns = 80; default-rows = 24;
+      restore-session = false;
+
+      default-profile-uuid = "00000000000000000000000000000000";
+      profile-uuids = [ "00000000000000000000000000000000" ];
     };
+    "org/gnome/Ptyxis/Profiles/00000000000000000000000000000000" = {
+      palette = "gnome";
+      preserve-directory = "always"; # needed for open-any-terminal
+    };
+    "com/github/stunkymonkey/nautilus-open-any-terminal" = {
+      terminal = "ptyxis";
+    };
+
     "org/gnome/TextEditor" = {
       restore-session = false;
       highlight-current-line = true;
       use-system-font = false;
       custom-font = "Terminus 11";
     };
+
 
     # extension prefs
     "org/gnome/shell" = {
