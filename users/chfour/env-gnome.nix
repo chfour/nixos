@@ -44,6 +44,10 @@
       custom-font = "Terminus 11";
     };
 
+    # don't try to suspend while plugged in
+    "org/gnome/settings-daemon/plugins/power" = {
+      sleep-inactive-ac-type = "nothing";
+    };
 
     # extension prefs
     "org/gnome/shell" = {
