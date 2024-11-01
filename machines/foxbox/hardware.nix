@@ -5,7 +5,7 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  systemd.services."touchpad-fix" = rec {
+  systemd.services."unfuck-touchpad" = rec {
     after = [ "post-resume.target" ];
     wantedBy = after;
     script = "${pkgs.kmod}/bin/modprobe -r psmouse && ${pkgs.kmod}/bin/modprobe psmouse";
