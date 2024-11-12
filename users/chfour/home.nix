@@ -140,6 +140,7 @@ in {
       gpredict
       #chirp # lol lmao
       pulseview
+      imhex
 
       # fonts
       noto-fonts
