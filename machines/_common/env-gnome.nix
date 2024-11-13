@@ -21,7 +21,7 @@
     '';
     extraGSettingsOverridePackages = with pkgs; [
       gnome-shell
-      tracker-miners
+      localsearch
     ];
   };
   environment.gnome.excludePackages = with pkgs; [
