@@ -101,6 +101,8 @@
       # gtk4 theme/scheme (i also set the gtk3 theme later)
       color-scheme = "prefer-dark";
 
+      accent-color = "slate";
+
       show-battery-percentage = true;
     };
 
