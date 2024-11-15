@@ -134,6 +134,7 @@ in {
       sox
       beets
       platformio
+      zbar # for reading phone hotspot qr codes lol
 
       sdrpp
       rtl-sdr
