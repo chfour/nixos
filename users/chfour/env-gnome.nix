@@ -1,16 +1,22 @@
 { pkgs, lib, ... }:
 
 {
-  home.packages = with pkgs.gnomeExtensions; [
-    appindicator
-    runcat
-    blur-my-shell
-    caffeine
-  ] ++ (with pkgs; [
+  home.packages = with pkgs; [
     ptyxis
     #gnome.gnome-terminal
     #blackbox-terminal # this thing keeps crashing and has generally started to piss me off
-  ]);
+  ];
+
+  programs.gnome-shell = {
+    enable = true;
+    extensions = builtins.map (p: { package = p; }) (with pkgs.gnomeExtensions; [
+      appindicator
+      runcat
+      blur-my-shell
+      caffeine
+      wiggle
+    ]);
+  };
 
   dconf.settings = let
     appShortcuts = [
@@ -47,17 +53,6 @@
     # don't try to suspend while plugged in
     "org/gnome/settings-daemon/plugins/power" = {
       sleep-inactive-ac-type = "nothing";
-    };
-
-    # extension prefs
-    "org/gnome/shell" = {
-      disable-user-extensions = false;
-      enabled-extensions = [
-        "appindicatorsupport@rgcjonas.gmail.com"
-        "runcat@kolesnikov.se" # run lil fella!!! also features eepy
-        "blur-my-shell@aunetx" # blur pretty,, pretty blur ................
-        "caffeine@patapon.info"
-      ];
     };
 
     "org/gnome/shell/extensions/appindicator" = {
