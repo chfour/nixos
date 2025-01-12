@@ -55,6 +55,11 @@
       sleep-inactive-ac-type = "nothing";
     };
 
+    "org/gnome/shell/extensions/wiggle" = {
+      # doesnt let you click, makes the mouse button "stuck" if dragging, weird
+      hide-cursor = false;
+    };
+
     "org/gnome/shell/extensions/appindicator" = {
       tray-pos = "right";
     };
