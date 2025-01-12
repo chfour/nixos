@@ -16,6 +16,18 @@
     powerOnBoot = false; # do not turn on bluetooth at boot
   };
 
+  boot.extraModprobeConfig = ''
+    # https://wiki.archlinux.org/title/Power_management#Audio
+    options snd-hda-intel power_save=1
+    # https://wiki.archlinux.org/title/Power_management#Intel_wireless_cards_(iwlwifi)
+    options iwlwifi power_save=1 uapsd_disable=0
+  '';
+
+  services.udev.extraRules = ''
+    # powertop wants this among many others
+    ACTION=="add",SUBSYSTEM=="pci",KERNEL=="0000:04:00.0",ATTR{power/control}="auto"
+  '';
+
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
