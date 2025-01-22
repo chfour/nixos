@@ -14,7 +14,6 @@
       runcat
       blur-my-shell
       caffeine
-      wiggle
     ]);
   };
 
@@ -53,11 +52,6 @@
     # don't try to suspend while plugged in
     "org/gnome/settings-daemon/plugins/power" = {
       sleep-inactive-ac-type = "nothing";
-    };
-
-    "org/gnome/shell/extensions/wiggle" = {
-      # doesnt let you click, makes the mouse button "stuck" if dragging, weird
-      hide-cursor = false;
     };
 
     "org/gnome/shell/extensions/appindicator" = {
