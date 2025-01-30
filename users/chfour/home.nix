@@ -78,6 +78,7 @@ in {
       "editor.minimap.enabled" = false;
       "workbench.colorTheme" = "Monokai";
       "workbench.iconTheme" = "material-icon-theme";
+      "workbench.startupEditor" = "none";
       "files.eol" = "\n";
       "editor.cursorBlinking" = "phase";
       "clangd.path" = (lib.getOutput "bin" pkgs.clang-tools.overrideAttrs (old: { clang = pkgs.clang_multi; })) + "/bin/clangd"; # i guess?
