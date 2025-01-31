@@ -3,21 +3,25 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
-    
+
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-    
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    website = {
+      url = "github:chfour/website3/main";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
-  
-  outputs = { self, nixpkgs, nixpkgs-master, nixos-hardware, home-manager, ... }: {
+
+  outputs = { self, nixpkgs, nixpkgs-master, nixos-hardware, home-manager, website, ... }: {
     nixosModules = {
       minecraft = ./modules/minecraft.nix;
-      
+
       declarativeHome = { ... }: {
-        # big thank you to https://determinate.systems/posts/declarative-gnome-configuration-with-nixos !!!
         imports = [ home-manager.nixosModules.home-manager ];
         config = {
           home-manager.useGlobalPkgs = true;
@@ -48,8 +52,11 @@
           declarativeHome ./users/chfour
         ];
       };
-      "fovps" = nixpkgs.lib.nixosSystem {
+      "fovps" = nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
+        specialArgs = {
+          website = website.packages.${system};
+        };
         modules = with self.nixosModules; [
           overlays defaults
           ./machines/fovps
