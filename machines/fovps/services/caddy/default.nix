@@ -1,6 +1,8 @@
-{ pkgs, website, ... }:
+{ pkgs, config, website, ... }:
 
-{
+let
+  lastModified = "${config.services.caddy.dataDir}/Last-Modified";
+in {
   services.caddy.enable = true;
   services.caddy.extraConfig = ''
     (errors) {
@@ -27,9 +29,17 @@
         redir * https://github.com/chfour/nixos/tree/main{uri}
       }
 
-      # the usual
+      vars {
+        # epic hack hacky hackk
+        import ${lastModified}
+      }
+
       root * ${websitePath}
       encode zstd gzip
+      header {
+        Last-Modified {vars.Last-Modified}
+        defer
+      }
       file_server
     '';
 
@@ -42,6 +52,17 @@
         browse ${./browsetemplate.html}
       }
     '';
+  };
+
+  systemd.services.caddy =  {
+    preStart = ''
+      {
+        echo -n 'Last-Modified "'
+        date --date="@$(stat /usr/bin/env --format='%Y')" -Ru \
+          | sed 's/+0000$/GMT/' | tr -d '\n'
+        echo '"'
+      } > ${lastModified}
+      '';
   };
   networking.firewall.allowedTCPPorts = [ 80 443 ];
   networking.firewall.allowedUDPPorts = [ 80 443 ];
