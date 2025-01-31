@@ -1,7 +1,8 @@
 { pkgs, config, website, ... }:
 
 let
-  lastModified = "${config.services.caddy.dataDir}/Last-Modified";
+  websiteDest = "${config.services.caddy.dataDir}/website";
+  websitePath = builtins.toString website.website.out;
 in {
   services.caddy.enable = true;
   services.caddy.extraConfig = ''
@@ -18,9 +19,7 @@ in {
     }
   '';
   services.caddy.virtualHosts = {
-    "eeep.ee".extraConfig = let
-      websitePath = builtins.toString website.website.out;
-    in ''
+    "eeep.ee".extraConfig = ''
       import errors
 
       # lol
@@ -29,17 +28,8 @@ in {
         redir * https://github.com/chfour/nixos/tree/main{uri}
       }
 
-      vars {
-        # epic hack hacky hackk
-        import ${lastModified}
-      }
-
-      root * ${websitePath}
+      root * ${websiteDest}
       encode zstd gzip
-      header {
-        Last-Modified {vars.Last-Modified}
-        defer
-      }
       file_server
     '';
 
@@ -54,15 +44,21 @@ in {
     '';
   };
 
-  systemd.services.caddy =  {
-    preStart = ''
-      {
-        echo -n 'Last-Modified "'
-        date --date="@$(stat /usr/bin/env --format='%Y')" -Ru \
-          | sed 's/+0000$/GMT/' | tr -d '\n'
-        echo '"'
-      } > ${lastModified}
+  system.activationScripts = {
+    copyWebsite = {
+      text = ''
+        # epic hack hacky hackk
+        mkdir -p ${websiteDest}
+        cp -r ${websitePath}/* ${websiteDest}
+        pushd ${websiteDest} && comm -z -13 \
+          <(find ${websitePath} -mindepth 1 -printf '%P\0' | sort -z) \
+          <(find . -mindepth 1 -printf '%P\0' | sort -z) \
+          | xargs -0 rm -rf; popd
+        # :trol:
+        ${pkgs.lib.getExe pkgs.gnused} -i 's|{{placeholder "http.vars.websitePath"}}|${websitePath}|' ${websiteDest}/index.html
       '';
+      deps = [];
+    };
   };
   networking.firewall.allowedTCPPorts = [ 80 443 ];
   networking.firewall.allowedUDPPorts = [ 80 443 ];
