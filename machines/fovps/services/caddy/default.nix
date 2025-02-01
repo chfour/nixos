@@ -55,7 +55,9 @@ in {
           <(find . -mindepth 1 -printf '%P\0' | sort -z) \
           | xargs -0 rm -rf; popd
         # :trol:
-        ${pkgs.lib.getExe pkgs.gnused} -i 's|{{placeholder "http.vars.websitePath"}}|${websitePath}|' ${websiteDest}/index.html
+        ${pkgs.lib.getExe pkgs.gnused} -i \
+          's|/nix/store/VERY5p3c14lsecretv4luereplaceme0-chfour-website|${websitePath}|' \
+          ${websiteDest}/index.html
       '';
       deps = [];
     };
