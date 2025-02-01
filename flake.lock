@@ -86,6 +86,18 @@
         "type": "github"
       }
     },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 0,
+        "narHash": "sha256-Xb8mke6UCYjge9kPR9o4P1nVrhk7QBbKv3xQ9cj7h2s=",
+        "path": "/nix/store/cginla74w7h4gln9b3mva6l4nmj6gj30-source",
+        "type": "path"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "type": "indirect"
+      }
+    },
     "root": {
       "inputs": {
         "home-manager": "home-manager",
@@ -113,16 +125,14 @@
     "website": {
       "inputs": {
         "flake-utils": "flake-utils",
-        "nixpkgs": [
-          "nixpkgs"
-        ]
+        "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1738362652,
-        "narHash": "sha256-jk0Pos+dukDVbUJdmYMLvvAxDmBWNs5ojICAZlBguQc=",
+        "lastModified": 1738419495,
+        "narHash": "sha256-lFnswORjHHEJHKnIaJnlNQWxTYnd22gUIRNsEkHh0o8=",
         "owner": "chfour",
         "repo": "website3",
-        "rev": "16fb2420dfcd269cc5b0639731bb5505dbfbcfd4",
+        "rev": "9507047349e9ed4ad48e8a3b59614f97e2004139",
         "type": "github"
       },
       "original": {

@@ -11,10 +11,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    website = {
-      url = "github:chfour/website3/main";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    website.url = "github:chfour/website3/main";
   };
 
   outputs = { self, nixpkgs, nixpkgs-master, nixos-hardware, home-manager, website, ... }: {
