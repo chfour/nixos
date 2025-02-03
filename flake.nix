@@ -16,8 +16,6 @@
 
   outputs = { self, nixpkgs, nixpkgs-master, nixos-hardware, home-manager, website, ... }: {
     nixosModules = {
-      minecraft = ./modules/minecraft.nix;
-
       declarativeHome = { ... }: {
         imports = [ home-manager.nixosModules.home-manager ];
         config = {
@@ -33,8 +31,6 @@
         };
         environment.stub-ld.enable = false; # 24.05
       };
-      # theres probably a better way to do this lol
-      overlays = ./overlays;
     };
     nixosConfigurations = {
       "foxbox" = nixpkgs.lib.nixosSystem rec {
@@ -43,7 +39,7 @@
           pkgs-master = nixpkgs-master.legacyPackages.${system};
         };
         modules = with self.nixosModules; [
-          overlays defaults
+          defaults
           ./machines/foxbox
           nixos-hardware.nixosModules.lenovo-thinkpad-e14-intel
           declarativeHome ./users/chfour
@@ -55,7 +51,7 @@
           website = website.packages.${system};
         };
         modules = with self.nixosModules; [
-          overlays defaults
+          defaults
           ./machines/fovps
           declarativeHome ./users/chfour
           minecraft
