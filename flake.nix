@@ -4,6 +4,13 @@
 
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
 
+    lix-module = {
+      type = "git";
+      url = "https://git.lix.systems/lix-project/nixos-module";
+      ref = "stable";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     home-manager = {
@@ -14,7 +21,7 @@
     website.url = "github:chfour/website3/main";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-master, nixos-hardware, home-manager, website, ... }: {
+  outputs = { self, nixpkgs, nixpkgs-master, lix-module, nixos-hardware, home-manager, website, ... }: {
     nixosModules = {
       declarativeHome = { ... }: {
         imports = [ home-manager.nixosModules.home-manager ];
@@ -24,6 +31,7 @@
         };
       };
       defaults = { ... }: {
+        imports = [ lix-module.nixosModules.default ];
         nixpkgs.config.allowUnfree = true;
         nix.settings = {
           experimental-features = [ "nix-command" "flakes" ];
@@ -54,7 +62,6 @@
           defaults
           ./machines/fovps
           declarativeHome ./users/chfour
-          minecraft
         ];
       };
     };
