@@ -54,11 +54,9 @@ in {
       text = ''
         # epic hack hacky hackk
         mkdir -p ${websiteDest}
-        cp -r ${websitePath}/* ${websiteDest}
-        pushd ${websiteDest} && comm -z -13 \
-          <(find ${websitePath} -mindepth 1 -printf '%P\0' | sort -z) \
-          <(find . -mindepth 1 -printf '%P\0' | sort -z) \
-          | xargs -0 rm -rf; popd
+        ${pkgs.lib.getExe pkgs.rsync} -r --copy-links --delete \
+          ${websitePath}/ ${websiteDest}
+
         # :trol:
         ${pkgs.lib.getExe pkgs.gnused} -i \
           's|/nix/store/VERY5p3c14lsecretv4luereplaceme0-chfour-website|${websitePath}|' \
