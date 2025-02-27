@@ -32,12 +32,14 @@
       };
       defaults = { ... }: {
         imports = [ lix-module.nixosModules.default ];
-        nixpkgs.config.allowUnfree = true;
-        nix.settings = {
-          experimental-features = [ "nix-command" "flakes" ];
-          auto-optimise-store = true;
+        config = {
+          nixpkgs.config.allowUnfree = true;
+          nix.settings = {
+            experimental-features = [ "nix-command" "flakes" ];
+            auto-optimise-store = true;
+          };
+          environment.stub-ld.enable = false; # 24.05
         };
-        environment.stub-ld.enable = false; # 24.05
       };
     };
     nixosConfigurations = {
