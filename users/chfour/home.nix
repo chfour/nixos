@@ -50,43 +50,45 @@ in {
     enable = isGui;
     package = pkgs.vscodium;
 
-    extensions = with pkgs.vscode-extensions; [
-      pkief.material-icon-theme
-      jnoortheen.nix-ide
-      ms-python.python
-      #ms-vscode.cpptools # :troll:
-      llvm-vs-code-extensions.vscode-clangd
-      vadimcn.vscode-lldb
-      ms-vscode.cmake-tools twxs.cmake
-      arrterian.nix-env-selector
-      donjayamanne.githistory
-    ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-      {
-        publisher = "mesonbuild"; name = "mesonbuild";
-        version = "1.22.0";
-        sha256 = "xws1dgivQgGIPe3dV7MbfrcHXrmsyYI2Ji5wLViAR6k=";
-      }
-    ];
+    profiles.default = {
+      extensions = with pkgs.vscode-extensions; [
+        pkief.material-icon-theme
+        jnoortheen.nix-ide
+        ms-python.python
+        #ms-vscode.cpptools # :troll:
+        llvm-vs-code-extensions.vscode-clangd
+        vadimcn.vscode-lldb
+        ms-vscode.cmake-tools twxs.cmake
+        arrterian.nix-env-selector
+        donjayamanne.githistory
+      ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+        {
+          publisher = "mesonbuild"; name = "mesonbuild";
+          version = "1.22.0";
+          sha256 = "xws1dgivQgGIPe3dV7MbfrcHXrmsyYI2Ji5wLViAR6k=";
+        }
+      ];
 
-    keybindings = [
-      { key = "f7"; "command" = "mesonbuild.build"; }
-    ];
+      keybindings = [
+        { key = "f7"; "command" = "mesonbuild.build"; }
+      ];
 
-    userSettings = {
-      "editor.fontFamily" = "\'Terminus (TTF)\', \'Droid Sans Mono\', \'monospace\', monospace";
-      "editor.fontSize" = 16;
-      "editor.minimap.enabled" = false;
-      "workbench.colorTheme" = "Monokai";
-      "workbench.iconTheme" = "material-icon-theme";
-      "workbench.startupEditor" = "none";
-      "files.eol" = "\n";
-      "editor.cursorBlinking" = "phase";
-      "clangd.path" = (lib.getOutput "bin" pkgs.clang-tools.overrideAttrs (old: { clang = pkgs.clang_multi; })) + "/bin/clangd"; # i guess?
-      "cmake.configureOnOpen" = false;
-      "mesonbuild.buildFolder" = "build";
-      "mesonbuild.muonPath" = pkgs.muon;
-      "mesonbuild.languageServer" = null;
-      "mesonbuild.downloadLanguageServer" = false;
+      userSettings = {
+        "editor.fontFamily" = "\'Terminus (TTF)\', \'Droid Sans Mono\', \'monospace\', monospace";
+        "editor.fontSize" = 16;
+        "editor.minimap.enabled" = false;
+        "workbench.colorTheme" = "Monokai";
+        "workbench.iconTheme" = "material-icon-theme";
+        "workbench.startupEditor" = "none";
+        "files.eol" = "\n";
+        "editor.cursorBlinking" = "phase";
+        "clangd.path" = (lib.getOutput "bin" pkgs.clang-tools.overrideAttrs (old: { clang = pkgs.clang_multi; })) + "/bin/clangd"; # i guess?
+        "cmake.configureOnOpen" = false;
+        "mesonbuild.buildFolder" = "build";
+        "mesonbuild.muonPath" = pkgs.muon;
+        "mesonbuild.languageServer" = null;
+        "mesonbuild.downloadLanguageServer" = false;
+      };
     };
   };
 
@@ -133,7 +135,6 @@ in {
       celluloid
       sox
       beets
-      platformio
       zbar # for reading phone hotspot qr codes lol
 
       sdrpp
