@@ -124,7 +124,6 @@ in {
       firefox
       libreoffice
       keepassxc
-      # (discord-canary.override { withOpenASAR = true; })
       vesktop
       helvum
       inkscape gimp
