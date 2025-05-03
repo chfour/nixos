@@ -212,11 +212,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1738419495,
-        "narHash": "sha256-lFnswORjHHEJHKnIaJnlNQWxTYnd22gUIRNsEkHh0o8=",
+        "lastModified": 1746289623,
+        "narHash": "sha256-VKDqHjrXMlYo65wcxcx0Zy0rR2b6hdHZYfzHceELio0=",
         "owner": "chfour",
         "repo": "website3",
-        "rev": "9507047349e9ed4ad48e8a3b59614f97e2004139",
+        "rev": "8e91e97a69f09d25a43dfaa9191aeac895fff07f",
         "type": "github"
       },
       "original": {
