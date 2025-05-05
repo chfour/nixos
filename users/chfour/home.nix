@@ -127,6 +127,10 @@ in {
       libreoffice
       keepassxc
       vesktop
+      (signal-desktop.overrideAttrs (old: {
+        # yea
+        patches = (old.patches or []) ++ [ ./signal-desktop-show-window.patch ];
+      }))
       helvum
       inkscape gimp
       blender
