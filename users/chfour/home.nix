@@ -132,7 +132,7 @@ in {
         patches = (old.patches or []) ++ [ ./signal-desktop-show-window.patch ];
       }))
       helvum
-      inkscape gimp
+      inkscape gimp3
       blender
       obs-studio
       prismlauncher
