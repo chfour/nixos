@@ -1,11 +1,11 @@
-diff --git a/asar-contents/app/main.js b/asar-contents/app/main.js
-index 627a1b5..2fa0cd0 100644
---- a/asar-contents/app/main.js
-+++ b/asar-contents/app/main.js
-@@ -501,7 +501,7 @@ async function createWindow() {
-   const width = windowConfig ? Math.min(windowConfig.width, maxWidth) : DEFAULT_WIDTH;
-   const height = windowConfig ? Math.min(windowConfig.height, maxHeight) : DEFAULT_HEIGHT;
-   const windowOptions = {
+diff --git a/app/main.ts b/app/main.ts
+index 0b0b531..3ed0047 100644
+--- a/app/main.ts
++++ b/app/main.ts
+@@ -706,7 +706,7 @@ async function createWindow() {
+     !app.getLoginItemSettings().wasOpenedAsHidden && !startInTray;
+ 
+   const windowOptions: Electron.BrowserWindowConstructorOptions = {
 -    show: false,
 +    show: true,
      width,
