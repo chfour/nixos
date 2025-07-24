@@ -80,8 +80,12 @@ in {
         "workbench.colorTheme" = "Monokai";
         "workbench.iconTheme" = "material-icon-theme";
         "workbench.startupEditor" = "none";
+        "window.titleBarStyle" = "native";
+        "window.customTitleBarVisibility" = "never";
+
         "files.eol" = "\n";
         "editor.cursorBlinking" = "phase";
+
         "clangd.path" = (lib.getOutput "bin" pkgs.clang-tools.overrideAttrs (old: { clang = pkgs.clang_multi; })) + "/bin/clangd"; # i guess?
         "cmake.configureOnOpen" = false;
         "mesonbuild.buildFolder" = "build";
@@ -150,6 +154,7 @@ in {
 
       # fonts
       noto-fonts
+      inter
       twitter-color-emoji
       fira
       terminus_font terminus_font_ttf
