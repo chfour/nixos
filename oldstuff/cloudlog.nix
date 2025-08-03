@@ -8,7 +8,7 @@ in
   services.cloudlog.enable = true;
   services.mysql.package = pkgs.mariadb; # idk lol thats the example
   services.cloudlog.database.createLocally = true;
-  
+
   services.cloudlog.extraConfig = ''
     $config['base_url'] = "//${domain}";
     include('${cfg.dataDir}/secrets.php');
@@ -18,7 +18,7 @@ in
     # unsafe path transition /assets -> /assets/{json,qslcard}
     "d ${cfg.dataDir}/assets      0750 ${cfg.user} ${config.services.nginx.group} - -"
   ];
-  
+
   # cursed
   services.nginx.user = config.services.caddy.user;
   services.nginx.group = config.services.caddy.group;
