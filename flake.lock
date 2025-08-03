@@ -157,8 +157,8 @@
     "nixpkgs_2": {
       "locked": {
         "lastModified": 0,
-        "narHash": "sha256-Xb8mke6UCYjge9kPR9o4P1nVrhk7QBbKv3xQ9cj7h2s=",
-        "path": "/nix/store/cginla74w7h4gln9b3mva6l4nmj6gj30-source",
+        "narHash": "sha256-W7lqHp0qZiENCDwUZ5EX/lNhxjMdNapFnbErcbnP11Q=",
+        "path": "/nix/store/p893dkrzm5rxvhnqh092prgi1a7dzmcy-source",
         "type": "path"
       },
       "original": {
@@ -212,11 +212,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1746289623,
-        "narHash": "sha256-VKDqHjrXMlYo65wcxcx0Zy0rR2b6hdHZYfzHceELio0=",
+        "lastModified": 1754220112,
+        "narHash": "sha256-4r1SC0djSVnC9drdz6PwsqX+eM0f7lhVo2FD2P/KPaA=",
         "owner": "chfour",
         "repo": "website3",
-        "rev": "8e91e97a69f09d25a43dfaa9191aeac895fff07f",
+        "rev": "001132a80573d4307928b1c2cd9b725cb12a8f2e",
         "type": "github"
       },
       "original": {
