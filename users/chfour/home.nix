@@ -5,7 +5,7 @@ let
 in {
   # not ugly anymore
   imports = builtins.concatLists [
-    (lib.optional osConfig.services.xserver.desktopManager.gnome.enable ./env-gnome.nix)
+    (lib.optional osConfig.services.desktopManager.gnome.enable ./env-gnome.nix)
   ];
 
   home.username = "chfour";
