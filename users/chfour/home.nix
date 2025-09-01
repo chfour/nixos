@@ -123,6 +123,9 @@ in {
 
       hyfetch
 
+      caddy
+
+      units
       mat2
       yt-dlp
     ]
@@ -136,7 +139,8 @@ in {
         patches = (old.patches or []) ++ [ ./signal-desktop-show-window.patch ];
       }))
       helvum
-      inkscape gimp3
+      inkscape gimp3 libresprite
+      # libresprite bc aseprite builds weird and its almost the same thing anyways
       blender
       obs-studio
       prismlauncher
