@@ -163,6 +163,7 @@ in {
       fira
       terminus_font terminus_font_ttf
       monaspace
+      geist-font
     ])
     (lib.optionals config.services.mpd.enable [ mpdevil mpc-cli ])
   ]);
