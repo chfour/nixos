@@ -55,7 +55,7 @@ in {
         # epic hack hacky hackk
         mkdir -p ${websiteDest}
         ${pkgs.lib.getExe pkgs.rsync} -r --copy-links --delete \
-          ${websitePath}/ ${websiteDest}
+          ${websitePath}/var/www/ ${websiteDest}
 
         # :trol:
         ${pkgs.lib.getExe pkgs.gnused} -i \
