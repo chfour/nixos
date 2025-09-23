@@ -32,7 +32,7 @@ let
     "babbar.tech" "barkrowler" "BLEXBot" "DotBot" "ICC-Crawler" "Cotoyogi"
     "ahrefs" "DataForSeoBot" "ImagesiftBot" "EtaoSpider" "QualifiedBot"
     "MJ12Bot" "dataforseo-bot" "bigsur.ai" "Datenbank Crawler" "netEstate"
-    "LivelapBot"
+    "LivelapBot" "SummalyBot"
     "Firefox/72.0" "Arc/"
     "Kangaroo Bot" # fucking crazy lmao
     # "Nexus 5X Build/MMB29P"
