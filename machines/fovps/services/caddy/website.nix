@@ -1,34 +1,86 @@
-{ pkgs, config, website, ... }:
+{ pkgs, config, ... }:
 
+# TODO: maybe make this into a module or sth
 let
-  websiteDest = "${config.services.caddy.dataDir}/website";
-  websitePath = builtins.toString website.website.out;
-in
-{
+  source = "github:chfour/website3#website";
+  dataDir = "/var/lib/website";
+  user = config.services.caddy.user;
+  group = config.services.caddy.group;
+in {
+  systemd.tmpfiles.rules = [
+    "d ${dataDir}/     0755 ${user} ${group} - -"
+    "f ${dataDir}/etag 0755 ${user} ${group} -"
+  ];
   services.caddy.virtualHosts = {
     "eeep.ee".extraConfig = ''
       import errors
       import bots
 
-      root * ${websiteDest}
-      encode zstd gzip
-      file_server
+      handle {
+        root * ${dataDir}/current/var/www
+        encode zstd gzip
+        header {
+          -Last-modified
+          import ${dataDir}/etag
+        }
+        file_server
+      }
     '';
   };
-  system.activationScripts = {
-    copyWebsite = {
+  systemd.services.update-website = let
+    updater-unpriv = pkgs.writeShellApplication {
+      name = "website-updater-unpriv";
+      runtimeInputs = [ config.nix.package ];
       text = ''
-        # epic hack hacky hackk
-        mkdir -p ${websiteDest}
-        ${pkgs.lib.getExe pkgs.rsync} -r --copy-links --delete \
-          ${websitePath}/var/www/ ${websiteDest}
+        cd "${dataDir}"
+        # build
+        rm -f next
+        nix build "${source}".out --out-link next
+        nextPath="$(readlink next)"
 
-        # :trol:
-        ${pkgs.lib.getExe pkgs.gnused} -i \
-          's|/nix/store/VERY5p3c14lsecretv4luereplaceme0-chfour-website|${websitePath}|' \
-          ${websiteDest}/index.html
+        # if the link target is the same (no changes) then exit, theres nothing to do
+        [ -e current ] &&
+          [ "$nextPath" = "$(readlink current)" ] &&
+          rm next && exit
+
+        # atomically swap
+        mv next current
+        echo 'Etag "\"'"''${nextPath##*/}"'\""' > ${dataDir}/etag
       '';
-      deps = [];
     };
+  in {
+    description = "Fully Automated Luxury Gay Space Communism";
+
+    # Behavior of oneshot is similar to simple; however, the
+    # service manager will consider the unit up after the main
+    # process exits. It will then start follow-up units.
+    before = [ "caddy.service" ];
+    wantedBy = [ "caddy.service" ];
+
+    path = [ pkgs.sudo config.systemd.package ];
+    script = ''
+      sudo -u ${user} -g ${group} \
+        ${updater-unpriv}/bin/website-updater-unpriv
+
+      # reload bc etag changed
+      systemctl is-active --quiet caddy.service &&
+        systemctl reload --no-block caddy.service || true
+    '';
+    # --no-block because it seems systemd blocks
+    # the reload until this service finishes...
+    # so it deadlocks here if caddy is running
+    # it's also fine because we only change Etag
+    # which shouldn't have any syntax errors...
+    # so it's not really our problem if something
+    # shits the bed
+    serviceConfig = {
+      Type = "oneshot";
+      User = "root";
+      Group = "root";
+    };
+    startAt = "05,17:00";
+  };
+  systemd.timers.update-website = {
+    timerConfig.RandomOffsetSec = "5h";
   };
 }
