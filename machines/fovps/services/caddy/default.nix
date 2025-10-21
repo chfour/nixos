@@ -1,9 +1,6 @@
-{ pkgs, config, website, ... }:
+{ pkgs, config, ... }:
 
 let
-  websiteDest = "${config.services.caddy.dataDir}/website";
-  websitePath = builtins.toString website.website.out;
-
   disallowedAgents = [
     # https://git.madhouse-project.org/iocaine/nam-shub-of-enki/src/branch/main/org/module
     # https://momenticmarketing.com/blog/ai-search-crawlers-bots
@@ -39,6 +36,9 @@ let
     # apparently that also blocks normal googlebot. oops!
   ];
 in {
+  imports = [
+    ./website.nix
+  ];
   services.caddy.enable = true;
   services.caddy.extraConfig = let
     agentsRegex = with pkgs; "(?i)" + lib.strings.escape [ "'" "\\" ]
@@ -68,15 +68,6 @@ in {
     }
   '';
   services.caddy.virtualHosts = {
-    "eeep.ee".extraConfig = ''
-      import errors
-      import bots
-
-      root * ${websiteDest}
-      encode zstd gzip
-      file_server
-    '';
-
     "files.eeep.ee".extraConfig = ''
       import errors
       import bots
@@ -87,23 +78,6 @@ in {
         browse ${./browsetemplate.html}
       }
     '';
-  };
-
-  system.activationScripts = {
-    copyWebsite = {
-      text = ''
-        # epic hack hacky hackk
-        mkdir -p ${websiteDest}
-        ${pkgs.lib.getExe pkgs.rsync} -r --copy-links --delete \
-          ${websitePath}/var/www/ ${websiteDest}
-
-        # :trol:
-        ${pkgs.lib.getExe pkgs.gnused} -i \
-          's|/nix/store/VERY5p3c14lsecretv4luereplaceme0-chfour-website|${websitePath}|' \
-          ${websiteDest}/index.html
-      '';
-      deps = [];
-    };
   };
   networking.firewall.allowedTCPPorts = [ 80 443 ];
   networking.firewall.allowedUDPPorts = [ 80 443 ];
