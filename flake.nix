@@ -15,11 +15,9 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    website.url = "github:chfour/website3/main";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-master, lix-module, nixos-hardware, home-manager, website, ... }: {
+  outputs = { self, nixpkgs, nixpkgs-master, lix-module, nixos-hardware, home-manager, ... }: {
     nixosModules = {
       declarativeHome = { ... }: {
         imports = [ home-manager.nixosModules.home-manager ];
@@ -55,9 +53,6 @@
       };
       "fovps" = nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
-        specialArgs = {
-          website = website.packages.${system};
-        };
         modules = with self.nixosModules; [
           defaults
           ./machines/fovps
