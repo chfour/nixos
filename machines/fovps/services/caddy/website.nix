@@ -81,6 +81,6 @@ in {
     startAt = "05,17:00";
   };
   systemd.timers.update-website = {
-    timerConfig.RandomOffsetSec = "5h";
+    timerConfig.RandomizedOffsetSec = "5h";
   };
 }
