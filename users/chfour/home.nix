@@ -34,13 +34,12 @@ in {
   programs.git = {
     enable = true;
 
-    userName = "chfour";
-    userEmail = "chfourchfour@protonmail.com";
-
     signing.signByDefault = true;
     signing.key = "BD2EC4C0608DED53";
 
-    extraConfig = {
+    settings = {
+      user.name = "chfour";
+      user.email = "chfourchfour@protonmail.com";
       commit.verbose = true;
       init.defaultBranch = "main";
     };
@@ -114,7 +113,8 @@ in {
   home.packages = builtins.concatLists (with pkgs; [
     [ # universal
       btop
-      micro
+      micro wl-clipboard
+      curl wget fzf
       tree file usbutils pciutils
       jq ffmpeg-full imagemagick
       sqlite-interactive
@@ -165,7 +165,7 @@ in {
       monaspace
       geist-font
     ])
-    (lib.optionals config.services.mpd.enable [ mpdevil mpc-cli ])
+    (lib.optionals config.services.mpd.enable [ plattenalbum mpc ])
   ]);
 
   fonts.fontconfig = {

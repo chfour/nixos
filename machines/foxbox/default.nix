@@ -61,9 +61,6 @@
   documentation.dev.enable = true;
 
   environment.systemPackages = with pkgs; [
-    micro wl-clipboard
-    curlHTTP3
-    wget fzf
     cnping # this has to be here because security.wrappers.*
     htop
 
