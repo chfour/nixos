@@ -10,6 +10,7 @@ in {
   systemd.tmpfiles.rules = [
     "d ${dataDir}/     0755 ${user} ${group} - -"
     "f ${dataDir}/etag 0755 ${user} ${group} -"
+    "L /nix/var/nix/gcroots/website - - - - ${dataDir}/current"
   ];
   services.caddy.virtualHosts = {
     "eeep.ee".extraConfig = ''
