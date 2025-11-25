@@ -4,11 +4,6 @@
 
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
 
-    lix-module = {
-      url = "https://git.lix.systems/lix-project/nixos-module/archive/main.tar.gz";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     home-manager = {
@@ -17,17 +12,27 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-master, lix-module, nixos-hardware, home-manager, ... }: {
+  outputs = { self, nixpkgs, nixpkgs-master, nixos-hardware, home-manager, ... }: {
     nixosModules = {
-      declarativeHome = { ... }: {
+      homeManager = { ... }: {
         imports = [ home-manager.nixosModules.home-manager ];
         config = {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
         };
       };
+      lix = { ... }: {
+        config = {
+          nixpkgs.overlays = [ (final: prev: {
+            # this is what the lix nixos module does
+            nixVersions = prev.nixVersions // {
+              stable = final.lixPackageSets.stable.lix;
+              stable_upstream = prev.nixVersions.stable;
+            };
+          }) ];
+        };
+      };
       defaults = { ... }: {
-        imports = [ lix-module.nixosModules.default ];
         config = {
           nixpkgs.config.allowUnfree = true;
           nix.settings = {
@@ -39,24 +44,24 @@
       };
     };
     nixosConfigurations = {
-      "foxbox" = nixpkgs.lib.nixosSystem rec {
+      foxbox = nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
         specialArgs = {
           pkgs-master = nixpkgs-master.legacyPackages.${system};
         };
         modules = with self.nixosModules; [
-          defaults
+          defaults lix homeManager
           ./machines/foxbox
           nixos-hardware.nixosModules.lenovo-thinkpad-e14-intel
-          declarativeHome ./users/chfour
+          ./users/chfour
         ];
       };
-      "fovps" = nixpkgs.lib.nixosSystem rec {
+      fovps = nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
         modules = with self.nixosModules; [
-          defaults
+          defaults lix homeManager
           ./machines/fovps
-          declarativeHome ./users/chfour
+          ./users/chfour
         ];
       };
     };
