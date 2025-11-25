@@ -14,6 +14,7 @@
       runcat
       blur-my-shell
       caffeine
+      fullscreen-notifications
     ]);
   };
 

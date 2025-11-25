@@ -85,6 +85,9 @@
     SUDO_PROMPT = "[sudo] programming socks required beyond this point: ";
   };
 
+  nix.daemonCPUSchedPolicy = "idle";
+  nix.daemonIOSchedClass = "idle";
+
   services.printing = {
     enable = true;
     drivers = with pkgs; [ hplip ];
