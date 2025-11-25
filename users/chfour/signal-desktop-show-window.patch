@@ -1,8 +1,8 @@
-diff --git a/app/main.ts b/app/main.ts
-index 0b0b531..3ed0047 100644
---- a/app/main.ts
-+++ b/app/main.ts
-@@ -706,7 +706,7 @@ async function createWindow() {
+diff --git a/app/main.main.ts b/app/main.main.ts
+index d9016c7..8d490af 100644
+--- a/app/main.main.ts
++++ b/app/main.main.ts
+@@ -704,7 +704,7 @@ async function createWindow() {
      !app.getLoginItemSettings().wasOpenedAsHidden && !startInTray;
  
    const windowOptions: Electron.BrowserWindowConstructorOptions = {
