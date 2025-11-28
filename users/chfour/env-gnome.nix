@@ -5,6 +5,7 @@
     ptyxis
     #gnome.gnome-terminal
     #blackbox-terminal # this thing keeps crashing and has generally started to piss me off
+    file-roller # whys that gone all of a sudden
   ];
 
   programs.gnome-shell = {
