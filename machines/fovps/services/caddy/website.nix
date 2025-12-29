@@ -45,7 +45,7 @@ in {
           rm next && exit
 
         # atomically swap
-        mv next current
+        mv -T next current
         echo 'Etag "\"'"''${nextPath##*/}"'\""' > ${dataDir}/etag
       '';
     };
