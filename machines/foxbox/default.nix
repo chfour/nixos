@@ -13,6 +13,11 @@
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  services.kmscon.enable = true;
+  services.kmscon.fonts = [
+    { name = "Terminus"; package = pkgs.terminus_font; }
+  ];
+
   time.timeZone = "Europe/Warsaw";
   i18n.defaultLocale = "en_US.UTF-8";
   i18n.extraLocaleSettings = {
