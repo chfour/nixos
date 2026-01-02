@@ -85,11 +85,6 @@
 
   fonts.enableDefaultPackages = true;
 
-  environment.variables = {
-    # teehee
-    SUDO_PROMPT = "[sudo] programming socks required beyond this point: ";
-  };
-
   nix.daemonCPUSchedPolicy = "idle";
   nix.daemonIOSchedClass = "idle";
 
