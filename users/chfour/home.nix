@@ -113,21 +113,10 @@ in {
   home.packages = builtins.concatLists (with pkgs; [
     [ # universal
       btop
-      micro wl-clipboard
-      curl wget fzf
+      micro
+      curl wget fzf jq
       tree file usbutils pciutils
-      jq ffmpeg-full imagemagick
-      sqlite-interactive
-      fzf
-      socat nmap
-
       hyfetch
-
-      caddy
-
-      units
-      mat2
-      yt-dlp
     ]
     (lib.optionals isGui [ # stuff i use on desktops
       firefox
@@ -145,9 +134,17 @@ in {
       obs-studio
       prismlauncher
       celluloid
+      mat2
+      yt-dlp
+      ffmpeg-full imagemagick
+      sqlite-interactive
+      caddy
+      socat nmap
       sox
       beets
       zbar # for reading phone hotspot qr codes lol
+      wl-clipboard # for micro
+      units
 
       sdrpp
       rtl-sdr
@@ -155,6 +152,7 @@ in {
       #chirp # lol lmao
       pulseview
       imhex
+      tio
 
       # fonts
       noto-fonts
